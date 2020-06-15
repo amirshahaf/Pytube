@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Pytube</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="{{ url_for('static', filename='main.js') }}"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    {% if download %}
+        <meta http-equiv='refresh' content='0; URL={{ download }}'>
+    {% endif %}
+</head>
+<body>
+<div class="container">
+    <div>
+<!-- check if submitted a link -->
+        {% if ask %}
+        <div class="text-center">
+            <img class="mb-4" src="{{ url_for('static', filename='logo.png') }}" style="width: 50%;">
+            <form method="post" action="/">
+                <input type="text" name="link" placeholder="Youtube video link" aria-describedby="linkhelp">
+                <small id="linkhelp" class="form-text text-muted">Link must include 'http://www.'</small>
+            </form>
+        </div>
+        {% else %}
+        <div>
+            <form method="post" id="download-form">
+                <h4>{{ title }}</h4>
+                <img src="{{ thumbnail }}" style="width: 100%;" aria-describedby="image-help">
+                <small id="image-help" class="form-text text-muted mb-2">Link must include 'http://www.'</small>
+                <label for="resolution">Select resolution: </label>
+                <select class="form-control form-control-lg" id="resolution">
+                  {% for resolution in resolutions %}
+                    <option>{{ resolution }}</option>
+                  {% endfor %}
+                </select>
+                <input type="hidden" id="link" value="{{ link }}">
+                <div class="text-center mt-3">
+                    <button type="submit" value="Submit" id="download-btn" class="btn btn-success">download</button>
+                </div>
+
+            </form>
+        </div>
+        {% endif %}
+
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+
+                    <div class="alert alert-success alert-dismissible fade show mt-2" role="alert">{{ message }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+
+            {%endfor%}
+        {% endif %}
+        {% endwith %}
+    </div>
+</div>
+
+</body>
+</html>

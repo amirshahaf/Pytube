@@ -1,0 +1,26 @@
+    html, body {
+    height: 100%;
+    background-image: url('{{ url_for('static', filename='background.png') }}');
+    background-repeat: repeat;
+    background-position: center
+    }
+    .container{
+    height: 100%;
+    width: 30%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    }
+
+    input[type=text] {
+      width: 300px;
+      box-sizing: border-box;
+      border: 2px solid #ccc;
+      border-radius: 4px;
+      font-size: 20px;
+      padding: 15px 20px 15px 40px;
+      transition: ease-in-out, width .35s ease-in-out;
+    }
+    input[type=text]:focus{
+        width: 600px;
+    }
