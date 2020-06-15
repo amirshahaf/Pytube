@@ -49,7 +49,7 @@ def api(video_id, resolution):
         name = ''.join(i for i in yt.title if i.isalpha())
         stream.download('static/videos', name)
 
-        return jsonify({'Download_link': f'{request.url_root}videos/{name}.mp4'})
+        return jsonify({'link': f'/videos/{name}.mp4'})
     except:
         return jsonify({'Api request status': '400 (Bad Request)'})
 
