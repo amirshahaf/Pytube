@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
         btn.appendChild(spinner);
 
         const request = new XMLHttpRequest();
-        const link = document.querySelector('#link').value;
+        const link = (document.querySelector('#link').value).replace('https://www.youtube.com/watch?v=', '');
         const resolution = document.querySelector('#resolution').value;
         const request_link = '/api/'+ link + '/' + resolution
         console.log(request_link)
